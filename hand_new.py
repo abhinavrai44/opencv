@@ -6,7 +6,7 @@ while(cap.isOpened()):
     ret, img = cap.read()
     cv2.rectangle(img,(300,300),(100,100),(0,255,0),0)
     crop_img = img[100:300, 100:300]
-    #crop_img = img
+    
     grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
     value = (35, 35)
     blurred = cv2.GaussianBlur(grey, value, 0)
@@ -40,8 +40,6 @@ while(cap.isOpened()):
         start = tuple(cnt[s][0])
         end = tuple(cnt[e][0])
         far = tuple(cnt[f][0])
-        #print "Start :"
-        #print start
         
         a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
         b = math.sqrt((far[0] - start[0])**2 + (far[1] - start[1])**2)
@@ -50,9 +48,9 @@ while(cap.isOpened()):
         if angle <= 90:
             count_defects += 1
             cv2.circle(crop_img,far,1,[0,0,255],-1)
-        #dist = cv2.pointPolygonTest(cnt,far,True)
+        
         cv2.line(crop_img,start,end,[0,255,0],2)
-        #cv2.circle(crop_img,far,5,[0,0,255],-1)
+        
     if count_defects == 0:
         cv2.putText(img,"1 Finger", (50,50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
     if count_defects == 1:
